@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daas Cup 2022-03-12</title>
+    <script>
+        const players = ["Player1", "Player2", "Player3", "player4", "Player5", "Player6", "Player7", "Player8"];
+        console.log(players.length)
+
+        // const teams = players.flatMap(
+        //     (v, i) => players.slice(i+1).map( w => v + '/' + w )
+        // );
+        // console.table(teams);
+
+        function shuffle(array) {
+            let currentIndex = array.length,  randomIndex;
+
+            // While there remain elements to shuffle...
+            while (currentIndex != 0) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+            }
+
+            return array;
+        }
+
+        shuffle(players);
+        console.log({players});
+
+        Array.prototype.pairs = function (func) {
+            for (var i = 0; i < this.length - 1; i++) {
+                for (var j = i; j < this.length - 1; j++) {
+                    func([this[i], this[j+1]]);
+                }
+            }
+        }
+
+        const teams = [];
+        players.pairs(function(team){
+            console.log(team);
+            teams.push(team);
+        });
+        console.table(teams)
+
+        const fixtures = [];
+        while(teams.length>0){
+            let team1=teams.pop();
+            let random_index = Math.floor(Math.random() * teams.length);
+            let team2=teams.splice(random_index, 1)[0];
+            fixtures.push([team1,team2])
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
